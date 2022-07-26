@@ -7,11 +7,15 @@
     "importer",
     "json"
   ],
-  "bin": "dist/index.js",
   "license": "MIT",
   "author": "Edie Lemoine <edie.lemoine@gmail.com>",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "bin": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "prepare": "husky install",
@@ -23,10 +27,18 @@
     "package.json": "npx -q sort-package-json",
     "src/**/*.ts": "eslint --fix"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
   "dependencies": {
     "@types/mock-fs": "^4.13.1",
     "@types/node": "^16.11.45",
@@ -56,16 +68,7 @@
   "engines": {
     "node": ">= 14"
   },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ]
+  "publishConfig": {
+    "access": "public"
   }
 }
