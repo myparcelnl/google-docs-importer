@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "module": "CommonJS",
+    "target": "ES2015"
+  },
+  "include": [
+    "src"
+  ]
+}

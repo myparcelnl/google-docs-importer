@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    uses: edielemoine/google-sheets-translations-importer/.github/workflows/test.yml@main
+    secrets: inherit
+
+  release:
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - uses:

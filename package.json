@@ -1,0 +1,71 @@
+{
+  "name": "@edielemoine/google-docs-importer",
+  "version": "0.0.0",
+  "description": "Imports Google docs documents and saves them to JSON.",
+  "keywords": [
+    "google-docs",
+    "importer",
+    "json"
+  ],
+  "bin": "dist/index.js",
+  "license": "MIT",
+  "author": "Edie Lemoine <edie.lemoine@gmail.com>",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "prepare": "husky install",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:serve": "vitest"
+  },
+  "lint-staged": {
+    "package.json": "npx -q sort-package-json",
+    "src/**/*.ts": "eslint --fix"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@types/mock-fs": "^4.13.1",
+    "@types/node": "^16.11.45",
+    "csv-parse": "^5.3.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node16-strictest-esm": "^1.0.3",
+    "@types/yargs": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "c8": "^7.12.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "mock-fs": "^5.1.2",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.3",
+    "vitest": "^0.19.1",
+    "yargs": "^17.5.1"
+  },
+  "engines": {
+    "node": ">= 14"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  }
+}
