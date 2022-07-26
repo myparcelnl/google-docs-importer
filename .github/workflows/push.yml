@@ -7,10 +7,12 @@ on:
 
 jobs:
   test:
+    name: 'Run tests 🧪'
     uses: edielemoine/google-sheets-translations-importer/.github/workflows/test.yml@main
     secrets: inherit
 
   release:
+    name: 'Release 🚀'
     runs-on: ubuntu-22.04
     needs: test
     steps:
@@ -18,8 +20,15 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 'Release 🚀'
-        run: npx -q semantic-release
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: '**/.github/workflows/push.yml'
+
+      - run: npm i --no-save semantic-release @semantic-release/git
+
+      - run: npx -q semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
