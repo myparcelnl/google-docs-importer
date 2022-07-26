@@ -1,7 +1,10 @@
+name: "Push to main ✨"
+
 on:
   push:
     branches:
       - main
+
 jobs:
   test:
     uses: edielemoine/google-sheets-translations-importer/.github/workflows/test.yml@main
@@ -15,7 +18,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: npx -q semantic-release
+      - name: 'Release 🚀'
+        run: npx -q semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
