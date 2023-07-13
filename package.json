@@ -70,6 +70,7 @@
     "semantic-release": "^19.0.3",
     "vitest": "^0.19.1"
   },
+  "packageManager": "yarn@3.6.1",
   "engines": {
     "node": ">= 14"
   },

@@ -20,39 +20,13 @@ jobs:
         with:
           persist-credentials: false
 
-
-      - name: 'Set up Node'
-        uses: actions/setup-node@v3
+      - uses: myparcelnl/yarn-install@v3
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: 'Set up pnpm'
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 6.7.0
-          run_install: false
-
-      - name: 'Get pnpm store directory'
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "::set-output name=dir::$(pnpm store path)"
-
-      - name: 'Prepare pnpm cache'
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: 'Install pnpm dependencies'
-        shell: bash
-        run: pnpm install --frozen-lockfile
+          node-version: 18
 
       - name: 'Build'
         shell: bash
-        run: pnpm build
+        run: yarn build
 
       - run: npx -q semantic-release
         env:
