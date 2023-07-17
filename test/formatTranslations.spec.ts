@@ -7,7 +7,7 @@ describe("format translations", () => {
     const result = formatTranslations(
       ["nl", "woord"],
       ["language", "my_translation"],
-      createMockContext()
+      createMockContext(),
     );
 
     expect(result).toEqual({

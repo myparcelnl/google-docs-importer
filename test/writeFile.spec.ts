@@ -27,7 +27,7 @@ describe("writeFile", () => {
         a: "b",
         c: "d",
       },
-      createMockContext({ outputDir: "/path/to/fake/dir" })
+      createMockContext({ outputDir: "/path/to/fake/dir" }),
     );
 
     const contents = fs
@@ -52,7 +52,7 @@ describe("writeFile", () => {
         a: "b",
         c: "d",
       },
-      createMockContext({ outputDir: DIR })
+      createMockContext({ outputDir: DIR }),
     );
 
     await writeJsonFile(
@@ -61,7 +61,7 @@ describe("writeFile", () => {
         e: "f",
         g: "h",
       },
-      createMockContext({ outputDir: DIR })
+      createMockContext({ outputDir: DIR }),
     );
 
     const contents = fs

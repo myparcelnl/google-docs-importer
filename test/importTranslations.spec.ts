@@ -27,7 +27,7 @@ describe("import", () => {
   it("imports correctly", async () => {
     expect.assertions(3);
     getMock.mockResolvedValue(
-      "key,nl_NL,en_GB\nmy_translation,woord,wordasync\n"
+      "key,nl_NL,en_GB\nmy_translation,woord,wordasync\n",
     );
 
     await importTranslations(createMockContext());

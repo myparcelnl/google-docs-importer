@@ -2,7 +2,7 @@ import type { ImportTranslationsConfig } from "../../src";
 import { createConfig } from "../../src";
 
 export function mockConfig(
-  config?: Partial<ImportTranslationsConfig>
+  config?: Partial<ImportTranslationsConfig>,
 ): Required<ImportTranslationsConfig> {
   return createConfig({
     documentId: "abcde",
