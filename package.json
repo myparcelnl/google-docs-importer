@@ -13,9 +13,12 @@
   },
   "license": "MIT",
   "author": "Edie Lemoine <edie.lemoine@gmail.com>",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "main": "dist/index.js",
-  "module": "dist/index.js",
-  "bin": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": "dist/bin.js",
   "files": [
     "dist",
     "src"
