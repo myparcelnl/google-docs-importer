@@ -29,9 +29,9 @@ export async function importTranslations(context: Context): Promise<void> {
   }
 
   debug(
-    chalk.green("Fetching document %s with sheet id %s"),
-    chalk.cyan(config.documentId),
-    chalk.yellow(config.sheetId),
+    `Fetching document ${chalk.yellow(
+      config.documentId,
+    )} with sheet id ${chalk.cyan(config.sheetId)}`,
   );
 
   const data = await asyncGet(csvUrl);
