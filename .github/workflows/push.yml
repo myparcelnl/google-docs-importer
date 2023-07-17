@@ -20,9 +20,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: myparcelnl/yarn-install@v3
+      - uses: myparcelnl/actions/yarn-install@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: 'Build'
         shell: bash
