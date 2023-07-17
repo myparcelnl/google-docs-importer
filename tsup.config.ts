@@ -2,6 +2,6 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/bin.ts", "src/index.ts"],
-  format: ["cjs", "esm"],
+  format: ["esm"],
   tsconfig: "tsconfig.build.json",
 });

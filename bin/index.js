@@ -1,1 +1,1 @@
-require("../dist/bin.js");
+import("../dist/bin.js");
