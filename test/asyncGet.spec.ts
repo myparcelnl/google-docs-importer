@@ -1,6 +1,6 @@
 import { vi, describe, it, beforeEach, expect, afterEach } from "vitest";
 import { Stream } from "stream";
-import { asyncGet } from "../src/asyncGet";
+import { asyncGet } from "../src";
 
 let stream: Stream;
 

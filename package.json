@@ -14,18 +14,24 @@
   "license": "MIT",
   "author": "Edie Lemoine <edie.lemoine@gmail.com>",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "bin": "dist/bin.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": "./dist/bin.js",
   "files": [
+    "bin",
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "prepare": "husky install",
+    "build": "tsup-node",
+    "clean": "rimraf dist coverage",
+    "prepare": "is-ci || husky install",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:serve": "vitest"

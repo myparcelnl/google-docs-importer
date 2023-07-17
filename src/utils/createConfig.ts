@@ -1,7 +1,7 @@
-import type { ImportTranslationsConfig } from "./importTranslations";
+import type { ImportTranslationsConfig } from "../importTranslations";
 
 export function createConfig(
-  userConfig: ImportTranslationsConfig
+  userConfig: ImportTranslationsConfig,
 ): Required<ImportTranslationsConfig> {
   return {
     languageKey: "lang",

@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 
 import mock from "mock-fs";
-import { writeJsonFile } from "../src/writeJsonFile";
+import { writeJsonFile } from "../src";
 import fs from "fs";
-import { mockConfig } from "./bootstrap/mockConfig";
 import path from "path";
+import { createMockContext } from "./createMockContext";
 
 describe("writeFile", () => {
   beforeEach(() => {
@@ -21,10 +21,14 @@ describe("writeFile", () => {
 
   it("writes file", async () => {
     expect.assertions(1);
-    await writeJsonFile(mockConfig({ outputDir: "/path/to/fake/dir" }), "nl", {
-      a: "b",
-      c: "d",
-    });
+    await writeJsonFile(
+      "nl",
+      {
+        a: "b",
+        c: "d",
+      },
+      createMockContext({ outputDir: "/path/to/fake/dir" })
+    );
 
     const contents = fs
       .readFileSync("/path/to/fake/dir/nl.json")
@@ -42,15 +46,23 @@ describe("writeFile", () => {
   it("overwrites existing files", async () => {
     expect.assertions(1);
     const DIR = "/already/filled/dir";
-    await writeJsonFile(mockConfig({ outputDir: DIR }), "nl", {
-      a: "b",
-      c: "d",
-    });
+    await writeJsonFile(
+      "nl",
+      {
+        a: "b",
+        c: "d",
+      },
+      createMockContext({ outputDir: DIR })
+    );
 
-    await writeJsonFile(mockConfig({ outputDir: DIR }), "nl", {
-      e: "f",
-      g: "h",
-    });
+    await writeJsonFile(
+      "nl",
+      {
+        e: "f",
+        g: "h",
+      },
+      createMockContext({ outputDir: DIR })
+    );
 
     const contents = fs
       .readFileSync(path.resolve(DIR, "nl.json"))

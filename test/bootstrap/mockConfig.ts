@@ -1,5 +1,5 @@
-import type { ImportTranslationsConfig } from "../../src/importTranslations";
-import { createConfig } from "../../src/createConfig";
+import type { ImportTranslationsConfig } from "../../src";
+import { createConfig } from "../../src";
 
 export function mockConfig(
   config?: Partial<ImportTranslationsConfig>
@@ -7,7 +7,7 @@ export function mockConfig(
   return createConfig({
     documentId: "abcde",
     sheetId: 1,
-    outputDir: "dist",
+    outputDir: "/dist",
     ...config,
   });
 }

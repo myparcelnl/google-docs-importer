@@ -1,12 +1,12 @@
-import type {
-  ImportTranslationsConfig,
-  ResolvedTranslations,
-} from "./importTranslations";
+import type { ResolvedTranslations } from "./importTranslations";
+import chalk from "chalk";
+import type { Context } from "./types";
+import { VerbosityLevel } from "./types";
 
 export function formatTranslations(
   translation: string[],
   keys: string[],
-  config: Required<ImportTranslationsConfig>
+  context: Context,
 ): ResolvedTranslations {
   if (!translation[0]) {
     throw new Error("Invalid data");
@@ -16,20 +16,50 @@ export function formatTranslations(
   const [language, ...strings] = translation;
   const [, ...translationKeys] = keys;
 
+  if (context.verbosity >= VerbosityLevel.Info) {
+    context.debug(
+      chalk.green("Parsing language: %s"),
+      chalk.greenBright(language),
+    );
+  }
+
   const translationsObject = Object.fromEntries(
-    keys.map((_, i) => [translationKeys[i], strings[i]])
+    keys.map((_, i) => [translationKeys[i], strings[i]]),
   );
 
-  translationsObject[config.languageKey] = language;
+  if (context.config.languageKey) {
+    translationsObject[context.config.languageKey] = language;
+  }
 
-  // Delete empty translations so vue-i18n can handle fallback strings.
-  Object.keys(translationsObject).forEach((item) => {
+  const translationsObjectKeys = Object.keys(translationsObject);
+
+  // Delete empty translations.
+  translationsObjectKeys.filter(Boolean).forEach((item, index) => {
     const translation = translationsObject[item];
 
     if (!translation || !translation.length) {
       delete translationsObject[item];
     }
+
+    if (context.verbosity >= VerbosityLevel.Debug) {
+      const prefix =
+        index === translationsObjectKeys.length - 1 ? " └──" : " ├──";
+
+      context.debug(
+        prefix + " %s: %s",
+        chalk.yellow(item),
+        translationsObject[item],
+      );
+    }
   });
+
+  if (context.verbosity >= VerbosityLevel.Info) {
+    context.debug(
+      chalk.green("Parsed language: %s with %s keys"),
+      chalk.greenBright(language),
+      chalk.cyan(translationsObjectKeys.length),
+    );
+  }
 
   return { language, translationsObject };
 }

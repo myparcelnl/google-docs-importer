@@ -1,13 +1,11 @@
-import { transpose } from "./transpose";
-import { createConfig } from "./createConfig";
-import { writeJsonFile } from "./writeJsonFile";
+import { transpose, writeJsonFile, asyncGet } from "./utils";
 import { formatTranslations } from "./formatTranslations";
-
 import { parse } from "csv-parse/sync";
-import { asyncGet } from "./asyncGet";
+import chalk from "chalk";
+import type { Context } from "./types";
 
 export interface ImportTranslationsConfig {
-  documentId: string;
+  documentId?: string | undefined;
   languageKey?: string;
   outputDir?: string;
   sheetId?: number | string;
@@ -21,15 +19,20 @@ export type ResolvedTranslations = {
 /**
  * Imports translations for the app from a dedicated Google Sheet and converts them to JSON files.
  */
-export async function importTranslations(
-  userConfig: ImportTranslationsConfig
-): Promise<void[]> {
-  const config = createConfig(userConfig);
+export async function importTranslations(context: Context): Promise<void> {
+  const { debug, config } = context;
+
   const csvUrl = `https://docs.google.com/spreadsheets/d/${config.documentId}/gviz/tq?tqx=out:csv&gid=${config.sheetId}`;
 
   if (!config.documentId || !config.sheetId) {
     throw new Error("A valid documentId and sheetId must be passed.");
   }
+
+  debug(
+    chalk.green("Fetching document %s with sheet id %s"),
+    chalk.cyan(config.documentId),
+    chalk.yellow(config.sheetId),
+  );
 
   const data = await asyncGet(csvUrl);
   const records = parse(data, { delimiter: ",", quote: '"' });
@@ -40,15 +43,17 @@ export async function importTranslations(
     throw new Error("No translations were imported.");
   }
 
-  return Promise.all(
+  await Promise.all(
     translations.map((translation) => {
       const { language, translationsObject } = formatTranslations(
         translation,
         keys,
-        config
+        context,
       );
 
-      return writeJsonFile(config, language, translationsObject);
-    })
+      return writeJsonFile(language, translationsObject, context);
+    }),
   );
+
+  debug(chalk.green(`Imported ${chalk.cyan(translations.length)} languages`));
 }
