@@ -1,4 +1,4 @@
-import type { ImportTranslationsConfig } from "./importTranslations";
+import type { ResolvedImportTranslationsConfig } from "./importTranslations";
 import type { Debugger } from "debug";
 
 export enum VerbosityLevel {
@@ -14,7 +14,7 @@ export interface DebugConfig {
 }
 
 export interface Context {
-  config: Required<ImportTranslationsConfig>;
+  config: ResolvedImportTranslationsConfig;
   debug: Debugger;
   verbosity: number;
 }

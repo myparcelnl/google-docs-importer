@@ -1,9 +1,12 @@
-import type { ImportTranslationsConfig } from "../../src";
+import type {
+  ResolvedImportTranslationsConfig,
+  InputImportTranslationsConfig,
+} from "../../src";
 import { createConfig } from "../../src";
 
 export function mockConfig(
-  config?: Partial<ImportTranslationsConfig>,
-): Required<ImportTranslationsConfig> {
+  config?: InputImportTranslationsConfig,
+): ResolvedImportTranslationsConfig {
   return createConfig({
     documentId: "abcde",
     sheetId: 1,

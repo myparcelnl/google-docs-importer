@@ -1,8 +1,11 @@
-import type { ImportTranslationsConfig } from "../importTranslations";
+import type {
+  InputImportTranslationsConfig,
+  ResolvedImportTranslationsConfig,
+} from "../importTranslations";
 
 export function createConfig(
-  userConfig: ImportTranslationsConfig,
-): Required<ImportTranslationsConfig> {
+  userConfig: InputImportTranslationsConfig,
+): ResolvedImportTranslationsConfig {
   return {
     languageKey: "lang",
     sheetId: 0,

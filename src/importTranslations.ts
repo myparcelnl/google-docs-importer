@@ -4,12 +4,20 @@ import { parse } from "csv-parse/sync";
 import chalk from "chalk";
 import type { Context } from "./types";
 
+export interface InputImportTranslationsConfig
+  extends ImportTranslationsConfig {
+  documentId: string;
+}
+
 export interface ImportTranslationsConfig {
   documentId?: string | undefined;
   languageKey?: string;
   outputDir?: string;
   sheetId?: number | string;
 }
+
+export type ResolvedImportTranslationsConfig =
+  Required<ImportTranslationsConfig>;
 
 export type ResolvedTranslations = {
   language: string;
