@@ -1,6 +1,6 @@
 {
   "name": "@edielemoine/google-docs-importer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Imports Google docs documents and saves them to JSON.",
   "keywords": [
     "google-docs",
