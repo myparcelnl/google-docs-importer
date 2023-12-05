@@ -1,26 +1,38 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  vi,
+  type SpyInstance,
+} from "vitest";
 
-import mock from "mock-fs";
 import { writeJsonFile } from "../src";
 import fs from "fs";
 import path from "path";
 import { createMockContext } from "./createMockContext";
 
-describe("writeFile", () => {
+describe("writeJsonFile", () => {
+  let mkdirSpy: SpyInstance;
+  let writeFileSpy: SpyInstance;
+
   beforeEach(() => {
-    mock({
-      "path/to/fake/dir": {},
-      "different/dir": {},
-      "already/filled/dir": {
-        "nl.json": {},
-      },
+    mkdirSpy = vi.spyOn(fs.promises, "mkdir").mockImplementation(() => {
+      return Promise.resolve("");
+    });
+
+    writeFileSpy = vi.spyOn(fs.promises, "writeFile").mockImplementation(() => {
+      return Promise.resolve();
     });
   });
 
-  afterEach(() => mock.restore());
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
   it("writes file", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     await writeJsonFile(
       "nl",
       {
@@ -30,17 +42,14 @@ describe("writeFile", () => {
       createMockContext({ outputDir: "/path/to/fake/dir" }),
     );
 
-    const contents = fs
-      .readFileSync("/path/to/fake/dir/nl.json")
-      .toString("utf-8");
-
-    expect(contents).toMatchInlineSnapshot(`
-      "{
-        \\"a\\": \\"b\\",
-        \\"c\\": \\"d\\"
-      }
-      "
-    `);
+    expect(mkdirSpy).toHaveBeenCalledWith("/path/to/fake/dir/", {
+      recursive: true,
+    });
+    expect(writeFileSpy).toHaveBeenCalledWith(
+      "/path/to/fake/dir/nl.json",
+      JSON.stringify({ a: "b", c: "d" }, null, 2) + "\n",
+      { encoding: "utf-8" },
+    );
   });
 
   it("overwrites existing files", async () => {
@@ -64,16 +73,10 @@ describe("writeFile", () => {
       createMockContext({ outputDir: DIR }),
     );
 
-    const contents = fs
-      .readFileSync(path.resolve(DIR, "nl.json"))
-      .toString("utf-8");
-
-    expect(contents).toMatchInlineSnapshot(`
-      "{
-        \\"e\\": \\"f\\",
-        \\"g\\": \\"h\\"
-      }
-      "
-    `);
+    expect(writeFileSpy).toHaveBeenCalledWith(
+      path.resolve(DIR, "nl.json"),
+      JSON.stringify({ e: "f", g: "h" }, null, 2) + "\n",
+      { encoding: "utf-8" },
+    );
   });
 });
