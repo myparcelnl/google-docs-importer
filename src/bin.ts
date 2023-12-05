@@ -38,9 +38,9 @@ import type { Context } from "./types";
       describe: "Env file to use to get document and sheet ID from.",
       type: "string",
     })
-    .option("silent", {
-      alias: "s",
-      describe: "Silence output",
+    .option("quiet", {
+      alias: "q",
+      describe: "Quiet output",
       type: "boolean",
       normalize: true,
     })
@@ -58,7 +58,7 @@ import type { Context } from "./types";
 
   const context = {
     config: createConfig(userConfig),
-    debug: createDebugger({ enabled: res.verbose >= 0 || !Number(res.silent) }),
+    debug: createDebugger({ enabled: res.verbose >= 0 || !Number(res.quiet) }),
     verbosity: res.verbose,
   } satisfies Context;
 
