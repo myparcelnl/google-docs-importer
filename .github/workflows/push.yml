@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: 'Run tests 🧪'
-    uses: edielemoine/google-sheets-translations-importer/.github/workflows/test.yml@main
+    uses: ./.github/workflows/test.yml
     secrets: inherit
 
   release:
