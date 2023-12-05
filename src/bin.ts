@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
-import {
-  importTranslations,
-  ImportTranslationsConfig,
-} from "./importTranslations";
+import type { ImportTranslationsConfig } from "./importTranslations";
+import { importTranslations } from "./importTranslations";
 import dotenv from "dotenv";
 import { createDebugger, createConfig } from "./utils";
 import type { Context } from "./types";

@@ -58,7 +58,6 @@ __metadata:
   resolution: "@edielemoine/google-docs-importer@workspace:."
   dependencies:
     "@semantic-release/git": "npm:^10.0.1"
-    "@tsconfig/node16-strictest-esm": "npm:^1.0.3"
     "@types/debug": "npm:^4.1.8"
     "@types/mock-fs": "npm:^4.13.1"
     "@types/node": "npm:^20.10.3"
@@ -77,7 +76,7 @@ __metadata:
     husky: "npm:^8.0.1"
     is-ci: "npm:^3.0.1"
     lint-staged: "npm:^13.0.3"
-    mock-fs: "npm:^5.1.2"
+    mock-fs: "npm:^5.2.0"
     prettier: "npm:^3.0.0"
     rimraf: "npm:^5.0.1"
     semantic-release: "npm:^21.0.7"
@@ -1165,13 +1164,6 @@ __metadata:
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
   checksum: 073bfa548026b1ebaf1659eb8961e526be22fa77139b10d60e712f46d2f0f05f4e6c8bec62a087d41088ee9e29faa7f54838568e475ab2f776171003c3920858
-  languageName: node
-  linkType: hard
-
-"@tsconfig/node16-strictest-esm@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@tsconfig/node16-strictest-esm@npm:1.0.3"
-  checksum: 1451a921efc16fa08c2647b16af9730c78a4ab111f5d85bb97f4b00e257df9dfa1b9d4d52f4a033fbcc2440eb954b6a43524907181c61e7d4a32e1b8b5ad3378
   languageName: node
   linkType: hard
 
@@ -4934,7 +4926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mock-fs@npm:^5.1.2":
+"mock-fs@npm:^5.2.0":
   version: 5.2.0
   resolution: "mock-fs@npm:5.2.0"
   checksum: e917e71295ee9d805c7d9ab0214a66658db0212f35731ba0c75dc1ccbb9964e6787a6d725561f05fcf569c64cf4a1176f5ce438f98b009227520f646f8abf174
