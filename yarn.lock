@@ -59,7 +59,6 @@ __metadata:
   dependencies:
     "@semantic-release/git": "npm:^10.0.1"
     "@types/debug": "npm:^4.1.8"
-    "@types/mock-fs": "npm:^4.13.1"
     "@types/node": "npm:^20.10.3"
     "@types/yargs": "npm:^17.0.10"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
@@ -76,7 +75,6 @@ __metadata:
     husky: "npm:^8.0.1"
     is-ci: "npm:^3.0.1"
     lint-staged: "npm:^13.0.3"
-    mock-fs: "npm:^5.2.0"
     prettier: "npm:^3.0.0"
     rimraf: "npm:^5.0.1"
     semantic-release: "npm:^21.0.7"
@@ -1234,15 +1232,6 @@ __metadata:
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
   checksum: f220f57f682bbc3793dab4518f8e2180faa79d8e2589c79614fd777d7182be203ba399020c3a056a115064f5d57a065004a32b522b2737246407621681b24137
-  languageName: node
-  linkType: hard
-
-"@types/mock-fs@npm:^4.13.1":
-  version: 4.13.1
-  resolution: "@types/mock-fs@npm:4.13.1"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 29cbedf7822e6fc2b6024c85dac66b0d103541edafc728b959cf07a6cd9977ee13db25c9bcb932eb7f66eb2270d79691f965c4be4bc8311d523f29bbd2ef742b
   languageName: node
   linkType: hard
 
@@ -4923,13 +4912,6 @@ __metadata:
     pkg-types: "npm:^1.0.3"
     ufo: "npm:^1.3.0"
   checksum: 905e3a704c7d3bcaad55f31d6efe9f680eab5be053ab7f8b299b8dbc027041f741fa6a93db9a3c461be2552632f3831b6c43c50af530f5fb2e9cd6273bc9d642
-  languageName: node
-  linkType: hard
-
-"mock-fs@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "mock-fs@npm:5.2.0"
-  checksum: e917e71295ee9d805c7d9ab0214a66658db0212f35731ba0c75dc1ccbb9964e6787a6d725561f05fcf569c64cf4a1176f5ce438f98b009227520f646f8abf174
   languageName: node
   linkType: hard
 
