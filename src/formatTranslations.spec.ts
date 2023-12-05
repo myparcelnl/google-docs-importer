@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { formatTranslations } from "../src";
-import { createMockContext } from "./createMockContext";
+import { formatTranslations } from "./index";
+import { createMockContext } from "./__tests__/createMockContext";
 
-describe("format translations", () => {
+describe("formatTranslations", () => {
   it("throws error when translations can't be parsed", () => {
     const result = formatTranslations(
       ["nl", "woord"],

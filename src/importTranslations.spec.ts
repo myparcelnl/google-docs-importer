@@ -9,15 +9,15 @@ import {
 } from "vitest";
 import fs from "fs";
 import { Stream } from "stream";
-import { importTranslations } from "../src";
-import * as asyncGet from "../src/utils/asyncGet";
-import { createMockContext } from "./createMockContext";
+import * as asyncGet from "./utils/asyncGet";
+import { createMockContext } from "./__tests__/createMockContext";
+import { importTranslations } from "./importTranslations";
 
 let stream: Stream;
 
 const getMock = vi.spyOn(asyncGet, "asyncGet");
 
-describe("import", () => {
+describe("importTranslations", () => {
   let mkdirSpy: SpyInstance;
   let writeFileSpy: SpyInstance;
 

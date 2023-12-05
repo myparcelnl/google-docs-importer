@@ -27,7 +27,13 @@
     "target": "ESNext",
     "verbatimModuleSyntax": true
   },
-  "include": [
-    "src"
+  "exclude": [
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/__fixtures__/**",
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/*.spec.*",
+    "**/*.snap"
   ]
 }

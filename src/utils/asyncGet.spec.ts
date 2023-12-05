@@ -1,10 +1,10 @@
 import { vi, describe, it, beforeEach, expect, afterEach } from "vitest";
 import { Stream } from "stream";
-import { asyncGet } from "../src";
+import { asyncGet } from "./asyncGet";
 
 let stream: Stream;
 
-describe("async https.get", () => {
+describe("asyncGet", () => {
   beforeEach(() => {
     stream = new Stream();
 

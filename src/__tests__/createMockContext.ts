@@ -1,5 +1,8 @@
-import type { ImportTranslationsConfig, Context } from "../src";
-import { createDebugger } from "../src";
+import {
+  createDebugger,
+  type ImportTranslationsConfig,
+  type Context,
+} from "../index";
 import { mockConfig } from "./bootstrap/mockConfig";
 
 export const createMockContext = (

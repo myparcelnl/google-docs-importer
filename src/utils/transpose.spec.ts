@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { transpose } from "../src";
+import { transpose } from "./transpose";
 
 describe("transpose", () => {
   it.each([

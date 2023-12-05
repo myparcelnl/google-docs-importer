@@ -8,10 +8,10 @@ import {
   type SpyInstance,
 } from "vitest";
 
-import { writeJsonFile } from "../src";
 import fs from "fs";
 import path from "path";
-import { createMockContext } from "./createMockContext";
+import { createMockContext } from "../__tests__/createMockContext";
+import { writeJsonFile } from "./writeJsonFile";
 
 describe("writeJsonFile", () => {
   let mkdirSpy: SpyInstance;

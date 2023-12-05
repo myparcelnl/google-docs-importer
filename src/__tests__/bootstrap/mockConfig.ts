@@ -1,8 +1,8 @@
 import type {
-  ResolvedImportTranslationsConfig,
   ImportTranslationsConfig,
-} from "../../src";
-import { createConfig } from "../../src";
+  ResolvedImportTranslationsConfig,
+} from "../../importTranslations";
+import { createConfig } from "../../utils";
 
 export function mockConfig(
   config?: Partial<ImportTranslationsConfig>,
