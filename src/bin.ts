@@ -29,7 +29,13 @@ import type { Context } from "./types";
     .option("languageKey", {
       alias: "l",
       default: null,
-      describe: "Language key to use in translation file.",
+      describe: "Language key to use in file.",
+      type: "string",
+    })
+    .option("prefix", {
+      alias: "p",
+      default: "",
+      describe: "Prefix to use for keys.",
       type: "string",
     })
     .option("envFile", {
@@ -54,6 +60,7 @@ import type { Context } from "./types";
     documentId: (res.documentId || process.env["GOOGLE_DOCUMENT_ID"]) ?? "",
     outputDir: res.output,
     sheetId: (res.sheetId || process.env["GOOGLE_SHEET_ID"]) ?? "",
+    prefix: (res.prefix || process.env["KEY_PREFIX"]) ?? "",
   } satisfies ImportTranslationsConfig;
 
   const context = {

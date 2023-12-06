@@ -13,6 +13,7 @@ export interface ImportTranslationsConfig {
   documentId?: string | undefined;
   languageKey?: string;
   outputDir?: string;
+  prefix?: string;
   sheetId?: number | string;
 }
 

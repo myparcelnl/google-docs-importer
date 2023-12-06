@@ -24,4 +24,20 @@ describe("formatTranslations", () => {
       formatTranslations([], ["a"], createMockContext());
     }).toThrow(Error);
   });
+
+  it("adds a prefix to the translation key", () => {
+    const result = formatTranslations(
+      ["nl", "woord"],
+      ["language", "my_translation"],
+      createMockContext({ prefix: "sp_" }),
+    );
+
+    expect(result).toEqual({
+      language: "nl",
+      translationsObject: {
+        lang: "nl",
+        sp_my_translation: "woord",
+      },
+    });
+  });
 });

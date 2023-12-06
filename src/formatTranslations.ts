@@ -23,8 +23,14 @@ export function formatTranslations(
     );
   }
 
+  const prefix = context.config.prefix ?? "";
+
   const translationsObject = Object.fromEntries(
-    keys.map((_, i) => [translationKeys[i], strings[i]]),
+    keys.map((_, i) => {
+      const key = prefix + translationKeys[i];
+
+      return [key, strings[i] ?? ""];
+    }),
   );
 
   if (context.config.languageKey) {
