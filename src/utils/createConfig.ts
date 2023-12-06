@@ -1,15 +1,16 @@
 import type {
-  InputImportTranslationsConfig,
-  ResolvedImportTranslationsConfig,
-} from "../importTranslations";
+  ResolvedImportSheetConfig,
+  InputImportSheetConfig,
+} from "../types";
 
 export function createConfig(
-  userConfig: InputImportTranslationsConfig,
-): ResolvedImportTranslationsConfig {
+  userConfig: InputImportSheetConfig,
+): ResolvedImportSheetConfig {
   return {
-    languageKey: "lang",
+    columnKey: "lang",
     sheetId: 0,
     outputDir: "translations",
+    prefix: "",
     ...userConfig,
   };
 }

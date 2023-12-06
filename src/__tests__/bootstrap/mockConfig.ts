@@ -1,12 +1,9 @@
-import type {
-  ImportTranslationsConfig,
-  ResolvedImportTranslationsConfig,
-} from "../../importTranslations";
 import { createConfig } from "../../utils";
+import type { ResolvedImportSheetConfig, ImportSheetConfig } from "../../types";
 
 export function mockConfig(
-  config?: Partial<ImportTranslationsConfig>,
-): ResolvedImportTranslationsConfig {
+  config?: Partial<ImportSheetConfig>,
+): ResolvedImportSheetConfig {
   return createConfig({
     // @ts-expect-error todo
     documentId: "abcde",

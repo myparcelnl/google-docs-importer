@@ -1,40 +1,40 @@
 import { describe, it, expect } from "vitest";
-import { formatTranslations } from "./index";
+import { formatRecords } from "./index";
 import { createMockContext } from "./__tests__/createMockContext";
 
-describe("formatTranslations", () => {
-  it("throws error when translations can't be parsed", () => {
-    const result = formatTranslations(
+describe("formatRecords", () => {
+  it("throws error when records can't be parsed", () => {
+    const result = formatRecords(
       ["nl", "woord"],
       ["language", "my_translation"],
       createMockContext(),
     );
 
     expect(result).toEqual({
-      language: "nl",
-      translationsObject: {
+      key: "nl",
+      records: {
         lang: "nl",
         my_translation: "woord",
       },
     });
   });
 
-  it("throws error when translations can't be parsed", () => {
+  it("throws error when records are empty", () => {
     expect(() => {
-      formatTranslations([], ["a"], createMockContext());
+      formatRecords([], ["a"], createMockContext());
     }).toThrow(Error);
   });
 
-  it("adds a prefix to the translation key", () => {
-    const result = formatTranslations(
+  it("adds a prefix to the keys", () => {
+    const result = formatRecords(
       ["nl", "woord"],
       ["language", "my_translation"],
       createMockContext({ prefix: "sp_" }),
     );
 
     expect(result).toEqual({
-      language: "nl",
-      translationsObject: {
+      key: "nl",
+      records: {
         lang: "nl",
         sp_my_translation: "woord",
       },

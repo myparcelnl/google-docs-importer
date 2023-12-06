@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
-import type { ImportTranslationsConfig } from "./importTranslations";
-import { importTranslations } from "./importTranslations";
+import { importSheet } from "./importSheet";
 import dotenv from "dotenv";
 import { createDebugger, createConfig } from "./utils";
-import type { Context } from "./types";
+import type { Context, ImportSheetConfig } from "./types";
 
 (async () => {
   const res = await yargs(process.argv.slice(2))
@@ -26,10 +25,10 @@ import type { Context } from "./types";
       describe: "Google Docs sheet ID.",
       type: "string",
     })
-    .option("languageKey", {
-      alias: "l",
-      default: null,
-      describe: "Language key to use in file.",
+    .option("columnKey", {
+      alias: "c",
+      default: "lang",
+      describe: "Key to use to identify the source column.",
       type: "string",
     })
     .option("prefix", {
@@ -50,6 +49,12 @@ import type { Context } from "./types";
       type: "boolean",
       normalize: true,
     })
+    .option("languageKey", {
+      alias: "l",
+      default: null,
+      describe: "Deprecated, use columnKey instead.",
+      type: "string",
+    })
     .count("verbose")
     .alias("v", "verbose")
     .parse(process.argv.slice(2));
@@ -61,7 +66,8 @@ import type { Context } from "./types";
     outputDir: res.output,
     sheetId: (res.sheetId || process.env["GOOGLE_SHEET_ID"]) ?? "",
     prefix: (res.prefix || process.env["KEY_PREFIX"]) ?? "",
-  } satisfies ImportTranslationsConfig;
+    columnKey: res.columnKey ?? res.languageKey,
+  } satisfies ImportSheetConfig;
 
   const context = {
     config: createConfig(userConfig),
@@ -69,5 +75,5 @@ import type { Context } from "./types";
     verbosity: res.verbose,
   } satisfies Context;
 
-  await importTranslations(context);
+  await importSheet(context);
 })();

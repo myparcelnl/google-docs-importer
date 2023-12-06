@@ -5,21 +5,21 @@ import {
   beforeEach,
   expect,
   afterAll,
-  type SpyInstance,
+  type MockInstance,
 } from "vitest";
 import fs from "fs";
 import { Stream } from "stream";
 import * as asyncGet from "./utils/asyncGet";
 import { createMockContext } from "./__tests__/createMockContext";
-import { importTranslations } from "./importTranslations";
+import { importSheet } from "./importSheet";
 
 let stream: Stream;
 
 const getMock = vi.spyOn(asyncGet, "asyncGet");
 
-describe("importTranslations", () => {
-  let mkdirSpy: SpyInstance;
-  let writeFileSpy: SpyInstance;
+describe("importSheet", () => {
+  let mkdirSpy: MockInstance;
+  let writeFileSpy: MockInstance;
 
   beforeEach(() => {
     stream = new Stream();
@@ -43,7 +43,7 @@ describe("importTranslations", () => {
     expect.assertions(5);
     getMock.mockResolvedValue("key,nl_NL,en_GB\nmy_translation,woord,word\n");
 
-    await importTranslations(createMockContext());
+    await importSheet(createMockContext());
 
     expect(mkdirSpy).toHaveBeenCalledTimes(2);
     expect(mkdirSpy).toHaveBeenCalledWith("/dist/", { recursive: true });
@@ -67,23 +67,23 @@ describe("importTranslations", () => {
   it("throws error if sheet data is invalid", async () => {
     expect.assertions(1);
     await expect(() => {
-      return importTranslations(createMockContext({ documentId: undefined }));
+      return importSheet(createMockContext({ documentId: undefined }));
     }).rejects.toBeInstanceOf(Error);
   });
 
   it("throws error if fetching sheet was not successful", async () => {
     expect.assertions(1);
     await expect(async () => {
-      await importTranslations(createMockContext());
+      await importSheet(createMockContext());
       stream.emit("data", '<html lang="en"></html>');
       stream.emit("end");
     }).rejects.toBeInstanceOf(Error);
   });
 
-  it("throws error if sheet does not contain translations", async () => {
+  it("throws error if sheet does not contain data", async () => {
     expect.assertions(1);
     await expect(async () => {
-      await importTranslations(createMockContext());
+      await importSheet(createMockContext());
       stream.emit("data", "");
       stream.emit("end");
     }).rejects.toBeInstanceOf(Error);
