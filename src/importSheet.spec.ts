@@ -88,4 +88,19 @@ describe("importSheet", () => {
       stream.emit("end");
     }).rejects.toBeInstanceOf(Error);
   });
+
+  it("prepends filename with a prefix if one is passed", async () => {
+    expect.assertions(1);
+    getMock.mockResolvedValue("key,nl_NL,en_GB\nmy_translation,woord,word\n");
+
+    await importSheet(createMockContext({ filenamePrefix: "prefix_" }));
+
+    expect(writeFileSpy).toHaveBeenNthCalledWith(
+      1,
+      "/dist/prefix_nl_NL.json",
+      JSON.stringify({ my_translation: "woord", lang: "nl_NL" }, null, 2) +
+        "\n",
+      { encoding: "utf-8" },
+    );
+  });
 });

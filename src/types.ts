@@ -21,6 +21,7 @@ export interface ImportSheetConfig {
   columnKey?: string;
   outputDir?: string;
   prefix?: string;
+  filenamePrefix?: string;
   sheetId?: number | string;
 }
 

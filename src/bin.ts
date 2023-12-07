@@ -37,6 +37,11 @@ import type { Context, ImportSheetConfig } from "./types";
       describe: "Prefix to use for keys.",
       type: "string",
     })
+    .option("filenamePrefix", {
+      default: "",
+      describe: "Prefix to use for filenames.",
+      type: "string",
+    })
     .option("envFile", {
       alias: "e",
       default: ".env",

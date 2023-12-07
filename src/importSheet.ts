@@ -33,9 +33,13 @@ export async function importSheet(context: Context): Promise<void> {
 
   await Promise.all(
     columns.map((record) => {
-      const { key, records } = formatRecords(record, keys, context);
+      const { key: filename, records } = formatRecords(record, keys, context);
 
-      return writeJsonFile(key, records, context);
+      return writeJsonFile(
+        (config.filenamePrefix ?? "") + filename,
+        records,
+        context,
+      );
     }),
   );
 

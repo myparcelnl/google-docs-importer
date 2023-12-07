@@ -11,6 +11,7 @@ export function createConfig(
     sheetId: 0,
     outputDir: "translations",
     prefix: "",
+    filenamePrefix: "",
     ...userConfig,
   };
 }
