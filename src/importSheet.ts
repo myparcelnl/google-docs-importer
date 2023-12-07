@@ -33,7 +33,6 @@ export async function importSheet(context: Context): Promise<void> {
 
   await Promise.all(
     columns.map((record) => {
-      console.log(record);
       const { key, records } = formatRecords(record, keys, context);
 
       return writeJsonFile(key, records, context);
