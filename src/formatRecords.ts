@@ -34,7 +34,7 @@ export function formatRecords(
     if (namespaces) {
       // group keys by namespace
       const ns = rowNamespaces[i] || "default";
-      if (!records[ns] || typeof records[ns] !== "object") {
+      if (!records[ns]) {
         records[ns] = {};
       }
       (records[ns] as Record<string, string>)[prefix + key] = strings[i] || "";
