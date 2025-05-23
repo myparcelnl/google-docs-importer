@@ -52,12 +52,7 @@ export async function importSheet(context: Context): Promise<void> {
         namespaces,
         context,
       );
-      if (namespaces) debug("yo2");
-      // let groupedRecords: Record<string, undefined> = {};
-      // if (namespaces) {
-      //   const ns = record.shift();
-      // }
-      //debug(record, records);
+
       return writeJsonFile(
         (config.filenamePrefix ?? "") + filename,
         records,
