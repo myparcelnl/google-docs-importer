@@ -28,7 +28,7 @@ export interface ImportSheetConfig {
 export type ResolvedImportSheetConfig = Required<ImportSheetConfig>;
 export type ResolvedRecords = {
   key: string;
-  records: Record<string, string>;
+  records: Record<string, string | Record<string, string>>;
 };
 
 export interface Context {
