@@ -42,8 +42,6 @@ export async function importSheet(context: Context): Promise<void> {
     [, , ...languageColumns] = columns;
   }
 
-  //debug(namespaces, keys, columns);
-
   await Promise.all(
     languageColumns.map((record) => {
       const { key: filename, records } = formatRecords(
