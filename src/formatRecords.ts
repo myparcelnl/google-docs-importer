@@ -24,7 +24,7 @@ export function formatRecords(
     );
   }
 
-  const prefix = context.config.prefix || "";
+  const prefix = context.config.prefix ?? "";
 
   const records: Record<string, string | Record<string, string>> = {};
   rowKeys.forEach((key, i) => {
