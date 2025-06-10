@@ -12,7 +12,7 @@
     "url": "https://github.com/myparcelnl/google-docs-importer"
   },
   "license": "MIT",
-  "author": "Edie Lemoine <support@myparcel.nl>",
+  "author": "MyParcel <support@myparcel.nl>",
   "type": "module",
   "exports": {
     ".": {
