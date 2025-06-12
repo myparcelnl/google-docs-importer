@@ -6,7 +6,7 @@ import chalk from "chalk";
 
 export const writeJsonFile = async (
   filename: string,
-  records: Record<string, string>,
+  records: Record<string, string | Record<string, string>>,
   { config, debug, verbosity }: Context,
 ): Promise<void> => {
   const filePath = path.resolve(config.outputDir, `${filename}.json`);

@@ -6,6 +6,7 @@ import type { Context } from "./types";
 
 /**
  * Imports a Google Sheet and writes it to one JSON file per column.
+ * Supports optional 'namespace' column as first column for grouping keys.
  */
 export async function importSheet(context: Context): Promise<void> {
   const { debug, config } = context;
@@ -25,15 +26,30 @@ export async function importSheet(context: Context): Promise<void> {
   const data = await asyncGet(csvUrl);
   const records = parse(data, { delimiter: ",", quote: '"' });
 
-  const [keys, ...columns] = transpose(records);
+  const columns = transpose(records),
+    [firstColumn, secondColumn] = columns;
 
-  if (!records.length || !keys || !columns.length) {
+  if (!records.length || !firstColumn || !secondColumn || !columns.length) {
     throw new Error("No rows were imported.");
   }
 
+  // Handle 'namespace' column
+  const hasNamespaces = "namespace" === firstColumn[0]?.toLowerCase(),
+    namespaces = hasNamespaces ? firstColumn : null,
+    keys = hasNamespaces ? secondColumn : firstColumn;
+  let [, ...languageColumns] = columns;
+  if (hasNamespaces) {
+    [, , ...languageColumns] = columns;
+  }
+
   await Promise.all(
-    columns.map((record) => {
-      const { key: filename, records } = formatRecords(record, keys, context);
+    languageColumns.map((record) => {
+      const { key: filename, records } = formatRecords(
+        record,
+        keys,
+        namespaces,
+        context,
+      );
 
       return writeJsonFile(
         (config.filenamePrefix ?? "") + filename,

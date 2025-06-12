@@ -1,5 +1,5 @@
 {
-  "name": "@edielemoine/google-docs-importer",
+  "name": "@myparcelnl/google-docs-importer",
   "version": "2.2.0",
   "description": "Imports Google docs documents and saves them to JSON.",
   "keywords": [
@@ -9,10 +9,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/EdieLemoine/google-docs-importer"
+    "url": "https://github.com/myparcelnl/google-docs-importer"
   },
   "license": "MIT",
-  "author": "Edie Lemoine <edie.lemoine@gmail.com>",
+  "author": "MyParcel <support@myparcel.nl>",
   "type": "module",
   "exports": {
     ".": {
@@ -86,10 +86,10 @@
   "engines": {
     "node": ">= 18"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "volta": {
     "node": "20.10.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

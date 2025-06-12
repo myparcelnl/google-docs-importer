@@ -7,6 +7,7 @@ describe("formatRecords", () => {
     const result = formatRecords(
       ["nl", "woord"],
       ["language", "my_translation"],
+      null,
       createMockContext(),
     );
 
@@ -21,7 +22,7 @@ describe("formatRecords", () => {
 
   it("throws error when records are empty", () => {
     expect(() => {
-      formatRecords([], ["a"], createMockContext());
+      formatRecords([], ["a"], null, createMockContext());
     }).toThrow(Error);
   });
 
@@ -29,6 +30,7 @@ describe("formatRecords", () => {
     const result = formatRecords(
       ["nl", "woord"],
       ["language", "my_translation"],
+      null,
       createMockContext({ prefix: "sp_" }),
     );
 
@@ -37,6 +39,25 @@ describe("formatRecords", () => {
       records: {
         lang: "nl",
         sp_my_translation: "woord",
+      },
+    });
+  });
+
+  it("groups by namespace", () => {
+    const result = formatRecords(
+      ["nl", "woord"],
+      ["language", "my_translation"],
+      ["namespace", "my_namespace"],
+      createMockContext(),
+    );
+
+    expect(result).toEqual({
+      key: "nl",
+      records: {
+        my_namespace: {
+          my_translation: "woord",
+        },
+        lang: "nl",
       },
     });
   });
