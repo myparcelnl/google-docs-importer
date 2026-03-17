@@ -13,9 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ 18, 20, 22, 24 ]
+        node-version: [ 18, 20, 22 ]
     env:
-      MAIN_NODE_VERSION: 24
+      MAIN_NODE_VERSION: 22
     steps:
       - uses: actions/checkout@v4
 
