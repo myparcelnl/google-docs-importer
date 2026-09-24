@@ -1,9 +1,11 @@
-name: "Push to main ✨"
+name: "Release 🚀"
 
 on:
   push:
     branches:
       - main
+
+  workflow_dispatch:
 
 jobs:
   test:
@@ -13,6 +15,7 @@ jobs:
 
   release:
     name: 'Release 🚀'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-22.04
     needs: test
     steps:
