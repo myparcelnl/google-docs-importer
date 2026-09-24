@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-22.04
     needs: test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - uses: myparcelnl/actions/yarn-install@v3
+      - uses: myparcelnl/actions/yarn-install@v4
         with:
           node-version: 20
 
