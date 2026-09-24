@@ -1,5 +1,5 @@
 {
-  "name": "mypa-google-docs-importer",
+  "name": "@myparcel-dev/google-docs-importer",
   "version": "1.0.1",
   "description": "Imports Google docs documents and saves them to JSON.",
   "keywords": [
