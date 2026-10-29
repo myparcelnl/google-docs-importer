@@ -5,7 +5,7 @@ import {
   beforeEach,
   afterEach,
   vi,
-  type SpyInstance,
+  type MockInstance,
 } from "vitest";
 
 import fs from "fs";
@@ -14,8 +14,8 @@ import { createMockContext } from "../__tests__/createMockContext";
 import { writeJsonFile } from "./writeJsonFile";
 
 describe("writeJsonFile", () => {
-  let mkdirSpy: SpyInstance;
-  let writeFileSpy: SpyInstance;
+  let mkdirSpy: MockInstance;
+  let writeFileSpy: MockInstance;
 
   beforeEach(() => {
     mkdirSpy = vi.spyOn(fs.promises, "mkdir").mockImplementation(() => {

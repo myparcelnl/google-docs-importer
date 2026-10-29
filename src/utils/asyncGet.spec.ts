@@ -4,15 +4,15 @@ import { asyncGet } from "./asyncGet";
 
 let stream: Stream;
 
+vi.mock("https", () => ({
+  get: vi.fn((_, cb) => {
+    cb(Object.assign(stream, { setEncoding: () => null }));
+  }),
+}));
+
 describe("asyncGet", () => {
   beforeEach(() => {
     stream = new Stream();
-
-    vi.mock("https", () => ({
-      get: vi.fn((_, cb) => {
-        cb(Object.assign(stream, { setEncoding: () => null }));
-      }),
-    }));
   });
 
   afterEach(() => {
@@ -29,10 +29,11 @@ describe("asyncGet", () => {
     expect(await promise).toBe("key,nl_NL,en_GB\n");
   });
 
-  it("handles error correctly", () => {
+  it("handles error correctly", async () => {
+    expect.assertions(1);
     const promise = asyncGet("url");
     stream.emit("error", new Error("Broken"));
 
-    expect(promise).rejects.toBeInstanceOf(Error);
+    await expect(promise).rejects.toBeInstanceOf(Error);
   });
 });
