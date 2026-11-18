@@ -283,13 +283,6 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
@@ -300,10 +293,3 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
-
-.yarn/*
-!.yarn/releases
-!.yarn/patches
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions

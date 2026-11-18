@@ -19,19 +19,29 @@ jobs:
     runs-on: ubuntu-22.04
     needs: test
     steps:
+      - uses: myparcelnl/actions/setup-git-credentials@v6
+        id: credentials
+        with:
+          app-id: ${{ secrets.MYPARCEL_APP_ID }}
+          private-key: ${{ secrets.MYPARCEL_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: false
+          token: ${{ steps.credentials.outputs.token }}
 
-      - uses: myparcelnl/actions/yarn-install@v4
+      - uses: pnpm/setup@v3
         with:
-          node-version: 24
+          cache: true
+          require-lockfile: true
 
       - name: 'Build'
         shell: bash
-        run: yarn build
+        run: pnpm build
 
-      - run: npx -q semantic-release
+      - uses: myparcelnl/actions/semantic-release@v6
+        with:
+          token: ${{ steps.credentials.outputs.token }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
